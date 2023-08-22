@@ -15,6 +15,11 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('brand_id');
+            $table->string('model');
+            $table->integer('year');
+            $table->decimal('price_per_day', 8, 2);
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }

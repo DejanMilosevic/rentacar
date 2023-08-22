@@ -15,6 +15,11 @@ class CreateRentalsTable extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('car_id');
+            $table->dateTime('rent_start_date');
+            $table->dateTime('rent_end_date');
+            $table->decimal('total_price', 8, 2);
             $table->timestamps();
         });
     }
