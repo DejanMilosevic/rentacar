@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CarResource;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,14 +12,11 @@ class CarController extends Controller
     
     public function index()
     {
-        $cars = Car::all();
+        $cars = CarResource::collection(Car::all());
         return response()->json(['cars' => $cars], 200);
     }
 
-    public function show(Car $car)
-    {
-        return view('cars.show', ['car' => $car]);
-    }
+ 
 
     public function store(Request $request)
     {
@@ -31,34 +29,34 @@ class CarController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $car = Car::create($validator->validated());
-        return redirect()->route('cars.index')->with('success', 'Car successfully added!');
+        return response()->json(['message' => 'Car successfully created!'], 200);
     }
 
     public function update(Request $request, Car $car)
     {
         $validator = Validator::make($request->all(), [
-            'brand_id' => 'sometimes|required|exists:brands,id',
-            'model' => 'sometimes|required|string|max:255',
-            'year' => 'sometimes|required|integer',
-            'price_per_day' => 'sometimes|required|numeric',
-            'is_available' => 'sometimes|required|boolean'
+            'brand_id' => 'required|exists:brands,id',
+            'model' => 'required|string|max:255',
+            'year' => 'required|integer',
+            'price_per_day' => 'required|numeric',
+            'is_available' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $car->update($validator->validated());
-        return redirect()->route('cars.index')->with('success', 'Car successfully updated!');
+        return response()->json(['message' => 'Car successfully updated!'], 200);
     }
 
     public function destroy(Car $car)
     {
         $car->delete();
-        return redirect()->route('cars.index')->with('success', 'Car successfully deleted!');
+        return response()->json(['message' => 'Car successfully deleted!'], 200);
     }
 }
