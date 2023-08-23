@@ -3,7 +3,9 @@ import CarCard from './CarCard';
 
 const Ponuda = ({ cars }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterAvailable, setFilterAvailable] = useState(false); // Novo stanje za filtriranje po dostupnosti
+    const [filterAvailable, setFilterAvailable] = useState(false); 
+    const [minPrice, setMinPrice] = useState('');   
+    const [maxPrice, setMaxPrice] = useState('');   
     const [displayCars, setDisplayCars] = useState(cars); 
 
     useEffect(() => {
@@ -20,9 +22,17 @@ const Ponuda = ({ cars }) => {
             filteredCars = filteredCars.filter(car => car.is_available === 1);
         }
 
+        if (minPrice !== '') {
+            filteredCars = filteredCars.filter(car => parseFloat(car.price_per_day) >= parseFloat(minPrice));
+        }
+
+        if (maxPrice !== '') {
+            filteredCars = filteredCars.filter(car => parseFloat(car.price_per_day) <= parseFloat(maxPrice));
+        }
+
         setDisplayCars(filteredCars);
 
-    }, [searchTerm, cars, filterAvailable]); // Dodajemo filterAvailable kao zavisnost
+    }, [searchTerm, cars, filterAvailable, minPrice, maxPrice]);
 
     return (
         <div className="ponuda-container">
@@ -32,6 +42,18 @@ const Ponuda = ({ cars }) => {
                     placeholder="Search by car model..." 
                     value={searchTerm} 
                     onChange={e => setSearchTerm(e.target.value)}
+                />
+                <input 
+                    type="number" 
+                    placeholder="Min price..." 
+                    value={minPrice} 
+                    onChange={e => setMinPrice(e.target.value)}
+                />
+                <input 
+                    type="number" 
+                    placeholder="Max price..." 
+                    value={maxPrice} 
+                    onChange={e => setMaxPrice(e.target.value)}
                 />
                 <button onClick={() => setFilterAvailable(!filterAvailable)}>
                     {filterAvailable ? 'Show All Cars' : 'Show Available Cars'}
