@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\RentalController;
@@ -29,3 +30,7 @@ Route::get('/brands', [BrandController::class, 'index']);
 // Rental routes
 Route::get('/rentals', [RentalController::class, 'index']);
 Route::post('/rentals', [RentalController::class, 'store']);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

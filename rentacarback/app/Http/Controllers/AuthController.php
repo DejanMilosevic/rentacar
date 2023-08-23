@@ -14,7 +14,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
            
         ]);
 
@@ -40,18 +40,20 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-
+        $token = $user->createToken('api_token')->plainTextToken;
         return response()->json([
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'role' => $user->role
+            'role' => $user->role,
+            'token' => $token
         ]);
     }
 
     public function logout()
     {
-        Auth::logout();
+        $user = Auth::user();
+        $user->tokens()->delete();
         return response()->json(['message' => 'User successfully logged out!'], 200);
     }
 }
