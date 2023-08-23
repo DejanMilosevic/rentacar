@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\RentalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Car routes
+Route::get('/cars', [CarController::class, 'index']);
+Route::post('/cars', [CarController::class, 'store']);
+Route::put('/cars/{car}', [CarController::class, 'update']);
+Route::delete('/cars/{car}', [CarController::class, 'destroy']);
+
+// Brand routes
+Route::get('/brands', [BrandController::class, 'index']);
+
+// Rental routes
+Route::get('/rentals', [RentalController::class, 'index']);
+Route::post('/rentals', [RentalController::class, 'store']);
