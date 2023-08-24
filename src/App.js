@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import CarCard from './CarCard';
 import Ponuda from './Ponuda';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/'  
@@ -32,8 +33,9 @@ function App() {
   return (
     <Router>
     <div className="App">
+    <Navbar></Navbar>
       <Routes>
-       
+        
         <Route path="/" element={<CarRentalHome />} exact />
 
         

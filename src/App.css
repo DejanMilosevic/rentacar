@@ -244,3 +244,34 @@
   color: #333;
   opacity: 0.75;
 }
+
+
+/* Navbar.css */
+nav {
+  background-color: #333;
+  padding: 0.5rem 2rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+nav a:hover {
+  background-color: #555;
+}
