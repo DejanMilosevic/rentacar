@@ -7,6 +7,8 @@ import CarCard from './CarCard';
 import Ponuda from './Ponuda';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Navbar';
+import Register from './Register';
+import Login from './Login';
 
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/'  
@@ -40,6 +42,8 @@ function App() {
 
         
         <Route path="/ponuda" element={<Ponuda cars={cars} />} />
+        <Route path="/register" element={<Register axiosInstance={axiosInstance} />} />
+        <Route path="/login" element={<Login axiosInstance={axiosInstance} />} />
 
         
       </Routes>
