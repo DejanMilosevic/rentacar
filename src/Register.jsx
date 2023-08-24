@@ -1,7 +1,9 @@
 // Register.js
 import React, { useState } from 'react'; 
+import { useNavigate } from 'react-router-dom';
 
 function Register({axiosInstance}) {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         name: '',
@@ -21,6 +23,7 @@ function Register({axiosInstance}) {
         axiosInstance.post('/api/register', formData)
             .then(response => {
                 console.log(response.data);
+                navigate('/login');
             })
             .catch(error => {
                 console.error("Error registering:", error);

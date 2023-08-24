@@ -13,13 +13,10 @@ import Login from './Login';
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/'  
 });
-function App() {
-
+function App() { 
   const [cars, setCars] = useState([]);
-
-  useEffect(() => {
-      
-
+  const [token, setToken] = useState(null); 
+  useEffect(() => { 
       axiosInstance.get('/api/cars')
           .then(response => {
               setCars(response.data.cars);  
@@ -35,15 +32,12 @@ function App() {
   return (
     <Router>
     <div className="App">
-    <Navbar></Navbar>
-      <Routes>
-        
-        <Route path="/" element={<CarRentalHome />} exact />
-
-        
+      <Navbar token={token} setToken={setToken}/> 
+      <Routes> 
+        <Route path="/" element={<CarRentalHome />} exact /> 
         <Route path="/ponuda" element={<Ponuda cars={cars} />} />
         <Route path="/register" element={<Register axiosInstance={axiosInstance} />} />
-        <Route path="/login" element={<Login axiosInstance={axiosInstance} />} />
+        <Route path="/login" element={<Login axiosInstance={axiosInstance} setToken={setToken} />} />
 
         
       </Routes>

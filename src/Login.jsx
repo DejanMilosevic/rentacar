@@ -1,8 +1,10 @@
 // Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
  
 
-function Login({axiosInstance}) {
+function Login({axiosInstance,setToken}) {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -21,8 +23,14 @@ function Login({axiosInstance}) {
         axiosInstance.post('/api/login', formData)
             .then(response => {
                 console.log(response.data);
-                // You might want to handle successful login here
-                // Like storing tokens or redirecting
+                navigate('/ponuda');
+                sessionStorage.setItem("auth_id",response.data.id);
+                sessionStorage.setItem("auth_email",response.data.email);
+                sessionStorage.setItem("auth_name",response.data.name);
+                sessionStorage.setItem("auth_token",response.data.token);
+                sessionStorage.setItem("auth_role",response.data.role);
+                setToken(response.data.role);
+
             })
             .catch(error => {
                 console.error("Error during login:", error);
