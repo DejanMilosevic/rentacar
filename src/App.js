@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import CarCard from './CarCard';
 import Ponuda from './Ponuda';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/'  
 });
@@ -28,10 +30,19 @@ function App() {
 
 
   return (
+    <Router>
     <div className="App">
-     <CarRentalHome></CarRentalHome>
-      <Ponuda cars={cars}></Ponuda>
+      <Routes>
+       
+        <Route path="/" element={<CarRentalHome />} exact />
+
+        
+        <Route path="/ponuda" element={<Ponuda cars={cars} />} />
+
+        
+      </Routes>
     </div>
+  </Router>
   );
 }
 
