@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Navbar';
 import Register from './Register';
 import Login from './Login';
+import AdminBoard from './AdminBoard';
 
 const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/'  
@@ -38,6 +39,7 @@ function App() {
         <Route path="/ponuda" element={<Ponuda cars={cars} />} />
         <Route path="/register" element={<Register axiosInstance={axiosInstance} />} />
         <Route path="/login" element={<Login axiosInstance={axiosInstance} setToken={setToken} />} />
+        <Route path="/admin" element={<AdminBoard cars={cars} />} />
 
         
       </Routes>
