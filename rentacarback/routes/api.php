@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/cars', [CarController::class, 'index']);
 Route::post('/cars', [CarController::class, 'store']);
 Route::put('/cars/{car}', [CarController::class, 'update']);
-Route::delete('/cars/{car}', [CarController::class, 'destroy']);
+Route::delete('/cars/{id}', [CarController::class, 'destroy']);
 
 // Brand routes
 Route::get('/brands', [BrandController::class, 'index']);

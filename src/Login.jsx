@@ -1,9 +1,7 @@
-// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
- 
 
-function Login({axiosInstance,setToken}) {
+function Login({ axiosInstance, setToken }) {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -23,13 +21,19 @@ function Login({axiosInstance,setToken}) {
         axiosInstance.post('/api/login', formData)
             .then(response => {
                 console.log(response.data);
-                navigate('/ponuda');
-                sessionStorage.setItem("auth_id",response.data.id);
-                sessionStorage.setItem("auth_email",response.data.email);
-                sessionStorage.setItem("auth_name",response.data.name);
-                sessionStorage.setItem("auth_token",response.data.token);
-                sessionStorage.setItem("auth_role",response.data.role);
+                sessionStorage.setItem("auth_id", response.data.id);
+                sessionStorage.setItem("auth_email", response.data.email);
+                sessionStorage.setItem("auth_name", response.data.name);
+                sessionStorage.setItem("auth_token", response.data.token);
+                sessionStorage.setItem("auth_role", response.data.role);
                 setToken(response.data.role);
+
+                // Provera uloge korisnika i preusmeravanje na odgovarajuću rutu
+                if (response.data.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/ponuda');
+                }
 
             })
             .catch(error => {
