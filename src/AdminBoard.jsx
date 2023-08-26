@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Uvezite useNavigate
 
 const AdminBoard = ({ cars }) => {
+    const navigate = useNavigate(); // Koristite hook
+
     const deleteCar = async (carId) => {
         const authToken = sessionStorage.getItem('auth_token');
 
@@ -11,13 +14,14 @@ const AdminBoard = ({ cars }) => {
                     'Authorization': `Bearer ${authToken}`
                 }
             });
-            // Nakon uspešnog brisanja, možete osvežiti listu automobila ili ukloniti automobil iz trenutnog stanja
-            // Na primer: setCars(cars => cars.filter(car => car.id !== carId));
-            window.location.reload(); // Ovo je brzo rešenje za osvežavanje stranice. Bolje je koristiti state i osvežiti listu automobila bez ponovnog učitavanja stranice.
+            window.location.reload();
         } catch (error) {
             console.error("Error during car deletion:", error);
-            // Ovde možete dodati poruku o grešci za korisnika
         }
+    }
+
+    const handleUpdate = (carId) => {
+        navigate(`/izmeni/${carId}`); // Vodi korisnika na stranicu za izmenu automobila
     }
 
     return (
@@ -32,7 +36,8 @@ const AdminBoard = ({ cars }) => {
                         <th>Year</th>
                         <th>Price per day</th>
                         <th>Availability</th>
-                        <th>Obrisi</th> {/* Dodata kolona za brisanje */}
+                        <th>Obrisi</th>
+                        <th>Izmeni</th> {/* Dodata kolona za izmenu */}
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +50,9 @@ const AdminBoard = ({ cars }) => {
                             <td>{car.is_available ? "Available" : "Not Available"}</td>
                             <td>
                                 <button onClick={() => deleteCar(car.id)}>Obriši</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleUpdate(car.id)}>Izmeni</button> {/* Dugme za navigaciju */}
                             </td>
                         </tr>
                     ))}
