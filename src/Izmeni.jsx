@@ -67,8 +67,8 @@ const Izmeni = ({ cars }) => {
                 <div>
                     <label>Availability:</label>
                     <select name="is_available" value={carData.is_available} onChange={handleChange}>
-                        <option value={true}>Available</option>
-                        <option value={false}>Not Available</option>
+                        <option value={1}>Available</option>
+                        <option value={0}>Not Available</option>
                     </select>
                 </div>
                 <div>
