@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Uvezite useNavigate
+import { useNavigate } from 'react-router-dom';  
 
 const AdminBoard = ({ cars }) => {
-    const navigate = useNavigate(); // Koristite hook
+    const navigate = useNavigate();  
 
     const deleteCar = async (carId) => {
         const authToken = sessionStorage.getItem('auth_token');
@@ -21,7 +21,7 @@ const AdminBoard = ({ cars }) => {
     }
 
     const handleUpdate = (carId) => {
-        navigate(`/izmeni/${carId}`); // Vodi korisnika na stranicu za izmenu automobila
+        navigate(`/izmeni/${carId}`);  
     }
 
     return (
@@ -37,7 +37,7 @@ const AdminBoard = ({ cars }) => {
                         <th>Price per day</th>
                         <th>Availability</th>
                         <th>Obrisi</th>
-                        <th>Izmeni</th> {/* Dodata kolona za izmenu */}
+                        <th>Izmeni</th>  
                     </tr>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@ const AdminBoard = ({ cars }) => {
                                 <button onClick={() => deleteCar(car.id)}>Obriši</button>
                             </td>
                             <td>
-                                <button onClick={() => handleUpdate(car.id)}>Izmeni</button> {/* Dugme za navigaciju */}
+                                <button onClick={() => handleUpdate(car.id)}>Izmeni</button> 
                             </td>
                         </tr>
                     ))}

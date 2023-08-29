@@ -20,16 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 // Car routes
 Route::get('/cars', [CarController::class, 'index']);
-Route::post('/cars', [CarController::class, 'store']);
-Route::put('/cars/{car}', [CarController::class, 'update']);
-Route::delete('/cars/{id}', [CarController::class, 'destroy']);
+Route::post('/cars', [CarController::class, 'store'])->middleware('auth:sanctum');;
+Route::put('/cars/{car}', [CarController::class, 'update'])->middleware('auth:sanctum');;
+Route::delete('/cars/{id}', [CarController::class, 'destroy'])->middleware('auth:sanctum');;
 
 // Brand routes
 Route::get('/brands', [BrandController::class, 'index']);
 
 // Rental routes
 Route::get('/rentals', [RentalController::class, 'index']);
-Route::post('/rentals', [RentalController::class, 'store']);
+Route::post('/rentals', [RentalController::class, 'store'])->middleware('auth:sanctum');;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

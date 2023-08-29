@@ -50,7 +50,7 @@ const Izmeni = ({ cars }) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Brand:</label>
-                    <input type="text" name="brand" value={carData.brand.name} onChange={handleChange} required  readOnly/>
+                    <input type="text" name="brand" value={carData.brand.name}   required  readOnly/>
                 </div>
                 <div>
                     <label>Model:</label>

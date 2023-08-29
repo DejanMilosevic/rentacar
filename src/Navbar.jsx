@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, useHistory, useNavigate } from 'react-router-dom';
-import axios from 'axios';  // Uvezi axios
+import axios from 'axios';   
 
 function Navbar({token,setToken}) {
-    const navigate = useNavigate();  // Hook za preusmeravanje korisnika
-
+    const navigate = useNavigate();  
     const handleLogout = async () => {
         try {
             const authToken = sessionStorage.getItem('auth_token');   
@@ -32,11 +31,11 @@ function Navbar({token,setToken}) {
             <ul>
                 <li><Link to="/">Home</Link></li>
 
-                {/* Ako token nije postavljen (null), prikaži Login i Register */}
+              
                 {!token && <li><Link to="/login">Login</Link></li>}
                 {!token && <li><Link to="/register">Register</Link></li>}
 
-                {/* Ako token postoji (nije null), prikaži Ponuda */}
+               
                 {token && <li><Link to="/ponuda">Ponuda</Link></li>}
                 {token && <li onClick={handleLogout}><a href="#">Logout</a></li>} 
             </ul>
